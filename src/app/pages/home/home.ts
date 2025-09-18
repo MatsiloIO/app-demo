@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { Products } from "../products/products";
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Products],
   template: `
-    <p>
-      Page d'accueil du site!
-    </p>
+    <h1>Listes des produits</h1>
+    <app-products/>
   `,
   styles: ``
 })
