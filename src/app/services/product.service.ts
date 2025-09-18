@@ -10,7 +10,7 @@ export class ProductService {
   public products = signal<Product[]>([]);
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, { auth: { persistSession: false } })
   }
 
   async loadProducts() {

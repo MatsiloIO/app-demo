@@ -1,16 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   template: `
     <div class="overflow-x-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h1>Listes des produits</h1>
+        <button class="btn btn-primary" routerLink="/add-product">Ajouter produit</button>
+      </div>
       <table class="table">
         <thead>
           <tr>
-            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Created At</th>
@@ -19,7 +23,6 @@ import { CurrencyPipe } from '@angular/common';
         <tbody>
            @for (prod of productService.products(); track prod.id) {
             <tr>
-              <th>{{prod.id}}</th>
               <td>{{prod.name}}</td>
               <td>{{prod.price | currency}}</td>
               <td>{{prod.created_at}}</td>
@@ -31,7 +34,7 @@ import { CurrencyPipe } from '@angular/common';
   `,
   styles: ``
 })
-export class Products implements OnInit {
+export default class Products implements OnInit {
 
   productService = inject(ProductService)
 

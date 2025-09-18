@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   template: `
-    <div class="max-w-lg mx-auto my-5">
+    <div class="max-w-2xl mx-auto my-5">
       <router-outlet />
     </div>
   `,
