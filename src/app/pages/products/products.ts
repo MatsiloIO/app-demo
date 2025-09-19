@@ -24,7 +24,7 @@ import { RouterLink } from '@angular/router';
            @for (prod of productService.products(); track prod.id) {
             <tr>
               <td>{{prod.name}}</td>
-              <td>{{prod.price | currency}}</td>
+              <td class="text-right">{{prod.price | currency}}</td>
               <td>{{prod.created_at}}</td>
             </tr>
           }

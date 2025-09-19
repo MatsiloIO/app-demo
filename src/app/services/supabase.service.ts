@@ -1,26 +1,19 @@
-import { Injectable, signal } from '@angular/core';
-import { createClient, SupabaseClient } from "@supabase/supabase-js"
+import { Injectable } from '@angular/core';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environment/environment';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // service singleton
 })
 export class SupabaseService {
-  private supabase: SupabaseClient
-  // signal pour stocker des données reactives
-  public data = signal<any[]>([]);
+  private static supabase: SupabaseClient
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
+    if (!SupabaseService.supabase)
+      SupabaseService.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, { auth: { persistSession: true, autoRefreshToken: true } })
   }
 
-  async fetchData(table: string) {
-    const { data, error } = await this.supabase.from(table).select('*')
-    if (error)
-      throw error
-    this.data.set(data || [])
-  }
-
-  getClient() {
-    return this.supabase
+  get client(): SupabaseClient {
+    return SupabaseService.supabase
   }
 }

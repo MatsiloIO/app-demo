@@ -19,6 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/products/add-product')
     },
     {
+        path: 'login',
+        loadComponent: () => import('./pages/auth/login')
+    },
+    {
         path: '**',
         redirectTo: ''
     }
