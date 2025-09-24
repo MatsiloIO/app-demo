@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Session } from '@supabase/supabase-js';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-menubar',
-  imports: [],
+  imports: [RouterLink],
   template: `
   <div class="navbar bg-base-200 px-4 shadow-md">
     <!-- Logo / Icône bidon -->
-    <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl">
+    <div class="flex-1 gap-4 items-center">
+      <a class="btn btn-ghost normal-case text-xl" routerLink="/">
         🚀 MonProjet
       </a>
+      <a class="btn btn-accent" routerLink="/products">Products</a>
+      <a class="btn btn-accent" routerLink="/clients">Clients</a>
     </div>
 
     <!-- Boutons -->
@@ -36,7 +39,8 @@ export class Menubar implements OnInit {
 
   session: Session | null = null
 
-  constructor(private authService: AuthService, private router: Router) { }
+  authService = inject(AuthService)
+  router = inject(Router)
 
   async ngOnInit(): Promise<void> {
     this.session = await this.authService.getSession()

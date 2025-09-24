@@ -9,11 +9,14 @@ export class SupabaseService {
   private static supabase: SupabaseClient
 
   constructor() {
-    if (!SupabaseService.supabase)
+    if (!SupabaseService.supabase) {
       SupabaseService.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, { auth: { persistSession: true, autoRefreshToken: true } })
+      console.log('instanciated***')
+    }
   }
 
   get client(): SupabaseClient {
+
     return SupabaseService.supabase
   }
 }

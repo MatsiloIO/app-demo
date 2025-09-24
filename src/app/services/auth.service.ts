@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthResponse, Session } from '@supabase/supabase-js';
 
@@ -7,7 +7,7 @@ import { AuthResponse, Session } from '@supabase/supabase-js';
 })
 export class AuthService {
 
-  constructor(private supabaseService: SupabaseService) { }
+  supabaseService = inject(SupabaseService)
 
   async signIn(email: string, password: string): Promise<AuthResponse> {
     return await this.supabaseService.client.auth.signInWithPassword({ email, password })

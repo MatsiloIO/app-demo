@@ -1,6 +1,6 @@
-interface Product {
-    id: string,
+export interface Product {
+    id?: string,
     name: string,
     price: number,
-    created_at: string
+    created_at?: string
 }
