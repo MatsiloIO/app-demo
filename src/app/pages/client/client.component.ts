@@ -22,7 +22,7 @@ import { Client } from '../../models/client.model'
     </div>
 
       <!-- Drawer formulaire -->
-      <div class="fixed top-0 right-0 h-full w-1/3 bg-base-200 shadow-lg z-50 transform transition-transform duration-300"
+      <div class="fixed top-0 right-0 h-full sm:w-1/2 lg:w-1/3  bg-base-200 shadow-lg z-50 transform transition-transform duration-300"
           [class.translate-x-full]="!showForm"
           [class.translate-x-0]="showForm">
         <div class="p-6 flex flex-col h-full">
@@ -94,7 +94,7 @@ import { Client } from '../../models/client.model'
        
     @if(loading){
       <div class="flex justify-center my-6">
-        <span class="loading loading-ring loading-lg"></span>
+        <span class="loading loading-ring loading-lg text-success"></span>
       </div>
     }
 
