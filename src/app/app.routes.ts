@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
 
@@ -10,7 +11,7 @@ export const routes: Routes = [
     {
         path: 'clients',
         loadComponent: () => import('./pages/client/client.component'),
-        //canActivate: [authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'products',
@@ -20,20 +21,16 @@ export const routes: Routes = [
     {
         path: 'orders',
         loadComponent: () => import('./pages/order/order.component'),
-        // canActivate: [authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'about',
         loadComponent: () => import('./pages/about/about')
     },
     {
-        path: 'add-product',
-        loadComponent: () => import('./pages/products/add-product'),
-        canActivate: [authGuard]
-    },
-    {
         path: 'login',
-        loadComponent: () => import('./pages/auth/login')
+        loadComponent: () => import('./pages/auth/login'),
+        canActivate: [guestGuard]
     },
     {
         path: '**',

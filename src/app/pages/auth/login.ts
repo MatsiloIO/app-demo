@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   imports: [FormsModule],
   template: `
-    <form (ngSubmit)="onLogin()" class="flex flex-col items-center gap-5 justify-center">
+    <form (ngSubmit)="onLogin()" class="flex flex-col items-center gap-5 justify-center h-full">
       <img src="assets/images/authentication.png" alt="secret" class="w-15"/>
       <label class="input">
         <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@ import { Router } from '@angular/router';
           [(ngModel)]="password"
         />
       </label>
-      <button type="submit" class="btn btn-primary">Se connecter</button>
+      <button type="submit" class="btn btn-sm btn-primary">Se connecter</button>
       @if (error) {
         <div role="alert" class="alert alert-error">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
