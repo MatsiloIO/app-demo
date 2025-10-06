@@ -39,6 +39,12 @@ export class GenericService<T> {
     if (error) throw error;
   }
 
+  async allWithoutPagination(): Promise<T[]> {
+    const { data, error } = await this.supabase.client.from(this.table).select('*');
+    if (error) throw error
+    return data
+  }
+
   async all(page = 1, pageSize = 10, search = ''): Promise<{ data: T[]; count: number }> {
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;

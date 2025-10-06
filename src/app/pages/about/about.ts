@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <p>
-      A propos de mon site!
+      A propos de Matsap!
     </p>
   `,
   styles: ``

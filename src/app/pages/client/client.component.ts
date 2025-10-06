@@ -2,6 +2,9 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms'
 import { Crud } from "../../crud/crud";
 import { ClientService } from '../../services/client.service';
+import { ColumnFactory } from '../../config/column.factory';
+import { ColumnConfig } from '../../config/column.config';
+import { Client } from '../../models/client.model';
 
 @Component({
   selector: 'app-client',
@@ -9,11 +12,8 @@ import { ClientService } from '../../services/client.service';
   imports: [Crud, ReactiveFormsModule],
   template: `
     <app-crud 
-      [entityName]="'Client'"
-      [columns]="[
-        {field: 'name', label:'Nom'},
-        {field: 'email', label:'Email'}
-      ]"
+      [entityName]="'client'"
+      [columns]="columns"
       [formConfig]="formConfig"
       [service]="clientService"
     />
@@ -23,8 +23,20 @@ import { ClientService } from '../../services/client.service';
 export default class ClientComponent {
 
   clientService = inject(ClientService)
-  formConfig = {
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
+  columns: ColumnConfig<Client>[] = [];
+  formConfig: { [K in keyof Client]?: any } = {};
+
+  async ngOnInit() {
+    this.columns = new ColumnFactory<Client>()
+      .addTextColumn('name', 'Nom', true, 'text')
+      .addTextColumn('email', 'Email', true, 'email')
+      .addDateColumn('created_at', 'Créé le', false)
+      .build();
+
+    this.formConfig = {
+      name: ['', Validators.required],
+      email: [''],
+    };
   }
+
 }
